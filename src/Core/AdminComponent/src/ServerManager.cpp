@@ -1,6 +1,5 @@
 #include <ServerManager.hpp>
 #include <AdminConsole.hpp>
-#include <ServerSocket.hpp>
 
 bool Admin::ServerManager::exec( QString &cmd , QString arg1)
 {
@@ -51,23 +50,38 @@ bool Admin::ServerManager::getStatus()
 
 void Admin::ServerManager::start()
 {
-    serverStatus = 1;
-
-
+    if(serverStatus == 0)
+    {
+        serverStatus = 1;
+        Admin::ServerManager::Socket = new Network::ServerSocket();
+    }
+    else
+        cout << "The server is already up";
 }
 
 void Admin::ServerManager::stop()
 {
-    serverStatus = 0;
+    if (serverStatus == 1)
+    {
+        serverStatus = 0;
+        delete (Socket);
+    }
+    else
+        cout << "The server is already down";
 }
 
 void Admin::ServerManager::restart()
 {
-    serverStatus = 0;
-    stop();
+    if(serverStatus == 1)
+    {
+        serverStatus = 0;
+        stop();
 
-    serverStatus = 1; //may be swap below
-    start();
+        serverStatus = 1; //may be swap below
+        start();
+     }
+    else
+        cout << "The Server is down";
 }
 //TODO
 //void Admin::ServerManager::messageAll(const QString &msg)

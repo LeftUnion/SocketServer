@@ -1,6 +1,8 @@
 #ifndef SERVERMANAGER_HPP
 #define SERVERMANAGER_HPP
 
+#include <ServerSocket.hpp>
+
 #include <QTextStream>
 #include <QString>
 
@@ -28,6 +30,7 @@ namespace Admin
 
         private:
 
+            Network::ServerSocket* Socket;
             static ServerManager* insServerManager;
 
         //methods

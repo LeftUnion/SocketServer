@@ -7,12 +7,7 @@ int main()
 {
     while (true)
     {
-        bool isRightCmd;
-        do
-        {
-            isRightCmd = Admin::AdminConsole::getAdminConsole()->inputCommand();
-
-        } while(!isRightCmd);
+        Admin::AdminConsole::getAdminConsole()->inputCommand();
     }
 
     return 0;

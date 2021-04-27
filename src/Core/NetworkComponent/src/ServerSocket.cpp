@@ -15,6 +15,8 @@ Network::ServerSocket::ServerSocket()
         close(baseSocket);
         exit(0);
     }
+    else
+        cout << "Socket has been created...";
 
     socklen_t size = sizeof (socketAddr);
     int isSocketBind = bind(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), size);
@@ -24,6 +26,8 @@ Network::ServerSocket::ServerSocket()
         close(baseSocket);
         exit(0);
     }
+    else
+        cout << "Socket has been bind...";
 
     int isListen = listen(baseSocket, MAX_USERS);
     if(isListen < 0)
@@ -32,16 +36,24 @@ Network::ServerSocket::ServerSocket()
        close(baseSocket);
        exit(0);
     }
+    else
+        cout << "Socket is listening";
 
     acceptSocket = accept(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), &size);
     if(acceptSocket >= 0)
     {
+        size_t userId = 1;
+        cout << "User #" << userId << " connected";
+        userId++;
+
         QString msg = "Connected";
-        send(baseSocket, &msg, sizeof(msg), );
+        send(baseSocket, &msg, sizeof(msg), 0);
 
         bool statusServer = Admin::ServerManager::getServerManager()->serverStatus;
         while (acceptSocket > 0 and statusServer == 1)
         {
+            recv(baseSocket, &msg, sizeof(msg), 0);
+
         }
     }
 
