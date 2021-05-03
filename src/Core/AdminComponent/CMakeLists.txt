@@ -18,7 +18,6 @@ target_link_libraries(${Component}
     Core::NetworkComponent
 )
 
-
 target_include_directories(${Component}
   PUBLIC
     ${CMAKE_CURRENT_SOURCE_DIR}/include

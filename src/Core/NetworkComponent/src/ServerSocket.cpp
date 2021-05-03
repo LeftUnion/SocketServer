@@ -11,39 +11,39 @@ Network::ServerSocket::ServerSocket()
     baseSocket = socket(PF_UNIX, SOCK_STREAM, IPPROTO_TCP);
     if(baseSocket < 0)
     {
-        cout << "ERROR: socket creating";
+        Network::cout << "ERROR: socket creating";
         close(baseSocket);
         exit(0);
     }
     else
-        cout << "Socket has been created...";
+        Network::cout << "Socket has been created...";
 
     socklen_t size = sizeof (socketAddr);
     int isSocketBind = bind(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), size);
     if(isSocketBind < 0)
     {
-        cout << "ERROR: socket bind";
+        Network::cout << "ERROR: socket bind";
         close(baseSocket);
         exit(0);
     }
     else
-        cout << "Socket has been bind...";
+        Network::cout << "Socket has been bind...";
 
     int isListen = listen(baseSocket, MAX_USERS);
     if(isListen < 0)
     {
-       cout << "ERROR: socket listening";
+       Network::cout << "ERROR: socket listening";
        close(baseSocket);
        exit(0);
     }
     else
-        cout << "Socket is listening";
+        Network::cout << "Socket is listening";
 
     acceptSocket = accept(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), &size);
     if(acceptSocket >= 0)
     {
         size_t userId = 1;
-        cout << "User #" << userId << " connected";
+        Network::cout << "User #" << userId << " connected";
         userId++;
 
         QString msg = "Connected";

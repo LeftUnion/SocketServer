@@ -38,9 +38,9 @@ Admin::ServerManager *Admin::ServerManager::getServerManager()
 {
     if(ServerManager::insServerManager == nullptr)
     {
-        insServerManager = new ServerManager();
+        ServerManager::insServerManager = new ServerManager();
     }
-    return insServerManager;
+    return ServerManager::insServerManager;
 }
 
 bool Admin::ServerManager::getStatus()
@@ -56,7 +56,7 @@ void Admin::ServerManager::start()
         Admin::ServerManager::Socket = new Network::ServerSocket();
     }
     else
-        cout << "The server is already up";
+        Admin::cout << "The server is already up";
 }
 
 void Admin::ServerManager::stop()
@@ -67,7 +67,7 @@ void Admin::ServerManager::stop()
         delete (Socket);
     }
     else
-        cout << "The server is already down";
+        Admin::cout << "The server is already down";
 }
 
 void Admin::ServerManager::restart()
@@ -81,7 +81,7 @@ void Admin::ServerManager::restart()
         start();
      }
     else
-        cout << "The Server is down";
+        Admin::cout << "The Server is down";
 }
 //TODO
 //void Admin::ServerManager::messageAll(const QString &msg)
@@ -91,13 +91,13 @@ void Admin::ServerManager::restart()
 
 void Admin::ServerManager::help()
 {
-    cout << "Available commands:" << endl;
-    cout << "start - запуск сервеа" << endl;
-    cout << "stop - выключение сервеа" << endl;
-    cout << "restart - перезапуск сервеа" << endl;
-    cout << "messageAll - отправить сообщение всем участникам сервера" << endl;
-    cout << "info - выводит информацию о сервере" << endl;
-    cout << "help - выводит список доступных команд" << endl;
+    Admin::cout << "Available commands:" << endl;
+    Admin::cout << "start - запуск сервеа" << endl;
+    Admin::cout << "stop - выключение сервеа" << endl;
+    Admin::cout << "restart - перезапуск сервеа" << endl;
+    Admin::cout << "messageAll - отправить сообщение всем участникам сервера" << endl;
+    Admin::cout << "info - выводит информацию о сервере" << endl;
+    Admin::cout << "help - выводит список доступных команд" << endl;
 }
 //TODO
 void Admin::ServerManager::info()

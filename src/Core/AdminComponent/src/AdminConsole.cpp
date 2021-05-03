@@ -1,18 +1,14 @@
 #include <AdminConsole.hpp>
 #include <ServerManager.hpp>
 
-#include <QTextStream>
-
 bool Admin::AdminConsole::inputCommand()
 {
-    QTextStream cin(stdin);
-    QTextStream cout(stdout);
 
-    cin >> getAdminConsole()->cmdLine;
+    Admin::cin >> getAdminConsole()->cmdLine;
     if(ServerManager::getServerManager()->exec(getAdminConsole()->cmdLine))
         return true;
 
-    cout << "Such command does not exist";
+    Admin::cout << "Such command does not exist";
     return false;
 }
 

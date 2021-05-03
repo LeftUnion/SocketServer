@@ -2,7 +2,6 @@ set(Component "MessageComponent")
 
 find_package(Qt5 ${QT_REQUIRED_VERSION} COMPONENTS REQUIRED
   Core
-  Widgets
 )
 
 file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/include/*.hpp")
@@ -16,7 +15,6 @@ add_library(${Component}
 target_link_libraries(${Component}
   PRIVATE
     Qt5::Core
-    Qt5::Widgets
 )
 
 

@@ -41,14 +41,16 @@ namespace Admin
             AdminConsole() = default;
 
             /*!
-             * \brief insAdminConsole - представитель класса
-             */
-            static AdminConsole* insAdminConsole;
-
-            /*!
              * \brief cmdLine - консоль, в которую вводятся команды
              */
             QString cmdLine;
+
+        protected:
+
+            /*!
+             * \brief insAdminConsole - представитель класса
+             */
+            static AdminConsole* insAdminConsole;
 
         public:
 
@@ -65,7 +67,7 @@ namespace Admin
             static AdminConsole *getAdminConsole();
 
             /*!
-             * \brief inputCommand - мметод, отвечающий за ввод команды
+             * \brief inputCommand - метод, отвечающий за ввод команды
              * \return 0 - команда не выполнена, 1 - команда выполнена
              */
             bool inputCommand();

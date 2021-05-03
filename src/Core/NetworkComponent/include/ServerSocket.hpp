@@ -34,7 +34,7 @@ namespace Network
      * \brief cout - поток вывода
      * \return
      */
-    QTextStream cout(stdin);
+    QTextStream cout(stdout);
 
     class ServerSocket
     {

@@ -9,7 +9,8 @@
 namespace Admin
 {
     using Qt::endl;
-    QTextStream cout(stdin);
+    QTextStream cout(stdout);
+    QTextStream cin(stdin);
 
     class ServerManager
     {
@@ -30,6 +31,11 @@ namespace Admin
 
         private:
 
+            //конструктор по умолчанию
+            ServerManager() = default;
+
+        protected:
+
             Network::ServerSocket* Socket;
             static ServerManager* insServerManager;
 
@@ -45,8 +51,6 @@ namespace Admin
 
         //available commands
         private:
-
-            ServerManager() = default;
 
             /*!
              * \brief getStatus - получение статуса сервера
@@ -86,7 +90,7 @@ namespace Admin
             void help();
     };
 
-    ServerManager* insServerManager = nullptr;
+    ServerManager* ServerManager::insServerManager = nullptr;
 }
 
 #endif // SERVERMANAGER_HPP
