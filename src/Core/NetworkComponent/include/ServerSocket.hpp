@@ -1,9 +1,6 @@
 #ifndef SERVERSOCKET_HPP
 #define SERVERSOCKET_HPP
 
-#include <QTextStream>
-#include <QString>
-
 #include <sys/types.h>
 #include <sys/socket.h>
 #include <sys/un.h>
@@ -11,7 +8,6 @@
 #include <netinet/in.h>
 #include <netdb.h>
 #include <unistd.h>
-
 
 namespace Network
 {
@@ -29,12 +25,6 @@ namespace Network
      * \brief MAX_USERS - максимальное кол-во пользователей на сервере
      */
     const int MAX_USERS = 5;
-
-    /*!
-     * \brief cout - поток вывода
-     * \return
-     */
-    QTextStream cout(stdout);
 
     class ServerSocket
     {

@@ -1,8 +1,12 @@
 #include <ServerSocket.hpp>
-#include <ServerManager.hpp>
+
+#include <string>
+
+#include <iostream>
 
 Network::ServerSocket::ServerSocket()
 {
+
     struct sockaddr_in socketAddr;
     socketAddr.sin_addr.s_addr = SERVER_ADDRES;
     socketAddr.sin_family = AF_INET;
@@ -11,46 +15,45 @@ Network::ServerSocket::ServerSocket()
     baseSocket = socket(PF_UNIX, SOCK_STREAM, IPPROTO_TCP);
     if(baseSocket < 0)
     {
-        Network::cout << "ERROR: socket creating";
+        std::cout << "ERROR: socket creating";
         close(baseSocket);
         exit(0);
     }
     else
-        Network::cout << "Socket has been created...";
+        std::cout << "Socket has been created...";
 
     socklen_t size = sizeof (socketAddr);
     int isSocketBind = bind(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), size);
     if(isSocketBind < 0)
     {
-        Network::cout << "ERROR: socket bind";
+        std::cout << "ERROR: socket bind";
         close(baseSocket);
         exit(0);
     }
     else
-        Network::cout << "Socket has been bind...";
+        std::cout << "Socket has been bind...";
 
     int isListen = listen(baseSocket, MAX_USERS);
     if(isListen < 0)
     {
-       Network::cout << "ERROR: socket listening";
+       std::cout << "ERROR: socket listening";
        close(baseSocket);
        exit(0);
     }
     else
-        Network::cout << "Socket is listening";
+        std::cout << "Socket is listening";
 
     acceptSocket = accept(baseSocket, reinterpret_cast<struct sockaddr*>(&socketAddr), &size);
     if(acceptSocket >= 0)
     {
         size_t userId = 1;
-        Network::cout << "User #" << userId << " connected";
+        std::cout << "User #" << userId << " connected";
         userId++;
 
-        QString msg = "Connected";
+        std::string msg = "Connected";
         send(baseSocket, &msg, sizeof(msg), 0);
 
-        bool statusServer = Admin::ServerManager::getServerManager()->serverStatus;
-        while (acceptSocket > 0 and statusServer == 1)
+        while (acceptSocket > 0)
         {
             recv(baseSocket, &msg, sizeof(msg), 0);
 

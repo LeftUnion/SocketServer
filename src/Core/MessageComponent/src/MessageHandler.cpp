@@ -1,12 +1,12 @@
 #include <MessageHandler.hpp>
 
 //TODO
-void Message::MessageHandler::imgFormating(QString &msg)
+void Message::MessageHandler::imgFormating(std::string &msg)
 {
 
 }
 
-void Message::MessageHandler::txtFormating(QString &msg)
+void Message::MessageHandler::txtFormating(std::string &msg)
 {
-    msg = msg.simplified();
+
 }

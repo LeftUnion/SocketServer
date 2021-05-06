@@ -1,10 +1,11 @@
 #include <ServerManager.hpp>
-#include <AdminConsole.hpp>
 
-bool Admin::ServerManager::exec( QString &cmd , QString arg1)
+std::shared_ptr<Admin::ServerManager> Admin::ServerManager::mServerManager = nullptr;
+std::mutex Admin::ServerManager::mMutex{};
+
+bool Admin::ServerManager::exec(commandType type)
 {
-    commandType command = availableCommands.find(cmd)->second;;
-    switch (command)
+    switch (type)
     {
         case START:
             start();
@@ -17,10 +18,6 @@ bool Admin::ServerManager::exec( QString &cmd , QString arg1)
         case RESTART:
             restart();
             return true;
-//TODO
-//        case MESSAGEALL:
-//            messageAll(arg1);
-//            return true;
 
         case INFO:
             info();
@@ -34,13 +31,13 @@ bool Admin::ServerManager::exec( QString &cmd , QString arg1)
     return false;
 }
 
-Admin::ServerManager *Admin::ServerManager::getServerManager()
+std::shared_ptr<Admin::ServerManager> Admin::ServerManager::getServerManager()
 {
-    if(ServerManager::insServerManager == nullptr)
-    {
-        ServerManager::insServerManager = new ServerManager();
-    }
-    return ServerManager::insServerManager;
+    std::lock_guard<std::mutex> lock(mMutex);
+    if(mServerManager == nullptr)
+        mServerManager.reset(new ServerManager);
+
+    return mServerManager;
 }
 
 bool Admin::ServerManager::getStatus()
@@ -53,10 +50,10 @@ void Admin::ServerManager::start()
     if(serverStatus == 0)
     {
         serverStatus = 1;
-        Admin::ServerManager::Socket = new Network::ServerSocket();
+        Admin::ServerManager::Socket.reset(new Network::ServerSocket);
     }
     else
-        Admin::cout << "The server is already up";
+        std::cout << "The server is already up";
 }
 
 void Admin::ServerManager::stop()
@@ -64,10 +61,9 @@ void Admin::ServerManager::stop()
     if (serverStatus == 1)
     {
         serverStatus = 0;
-        delete (Socket);
     }
     else
-        Admin::cout << "The server is already down";
+        std::cout << "The server is already down";
 }
 
 void Admin::ServerManager::restart()
@@ -81,23 +77,17 @@ void Admin::ServerManager::restart()
         start();
      }
     else
-        Admin::cout << "The Server is down";
+        std::cout << "The Server is down";
 }
-//TODO
-//void Admin::ServerManager::messageAll(const QString &msg)
-//{
-
-//}
 
 void Admin::ServerManager::help()
 {
-    Admin::cout << "Available commands:" << endl;
-    Admin::cout << "start - запуск сервеа" << endl;
-    Admin::cout << "stop - выключение сервеа" << endl;
-    Admin::cout << "restart - перезапуск сервеа" << endl;
-    Admin::cout << "messageAll - отправить сообщение всем участникам сервера" << endl;
-    Admin::cout << "info - выводит информацию о сервере" << endl;
-    Admin::cout << "help - выводит список доступных команд" << endl;
+    std::cout << "Available commands:"                    << std::endl;
+    std::cout << "start - запуск сервеа"                  << std::endl;
+    std::cout << "stop - выключение сервеа"               << std::endl;
+    std::cout << "restart - перезапуск сервеа"            << std::endl;
+    std::cout << "info - выводит информацию о сервере"    << std::endl;
+    std::cout << "help - выводит список доступных команд" << std::endl;
 }
 //TODO
 void Admin::ServerManager::info()

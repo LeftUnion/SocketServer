@@ -1,7 +1,7 @@
 #ifndef MESSAGEHANDLER_HPP
 #define MESSAGEHANDLER_HPP
 
-#include <QString>
+#include <string>
 
 namespace Message
 {
@@ -19,16 +19,16 @@ namespace Message
      */
     struct MessageInfo
     {
-        QString sender;
-        QString message;
+        std::string sender;
+        std::string message;
         MessageType type;
-        QString getter;
+        std::string getter;
     };
 
     class MessageHandler
     {
-        void imgFormating(QString &msg);  //TODO RETURN
-        void txtFormating(QString &msg);  //TODO RETURN
+        void imgFormating(std::string &msg);  //TODO RETURN
+        void txtFormating(std::string &msg);  //TODO RETURN
     };
 }
 

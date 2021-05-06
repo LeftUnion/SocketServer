@@ -1,9 +1,7 @@
-#include <AdminConsole.hpp>
+#include <CommandLine.hpp>
 
 int main()
 {
     while (true)
-        Admin::AdminConsole::getAdminConsole()->inputCommand();
-
-    return 0;
+        CommandLine::getCommandLine()->inputCommand();
 }
