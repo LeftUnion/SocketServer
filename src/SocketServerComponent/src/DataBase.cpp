@@ -6,7 +6,7 @@ DataBase::DataBase(std::string DBMS, std::string dataBase, std::string table)
     mDataBase->addDatabase("QPSQL");
     mDataBase->setDatabaseName("left");
     mDataBase->setUserName("left");
-    mDataBase->setPassword("sergey4607");
+    mDataBase->setPassword("");
     mDataBase->commit();
 }
 

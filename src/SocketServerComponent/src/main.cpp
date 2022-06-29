@@ -1,12 +1,19 @@
-#include <CommandLine.hpp>
+#include "CommandLine.hpp"
+
+#include <memory>
 
 int main()
 {
-    CommandLine userConsole;
+    bool isEOP = false;
+    std::unique_ptr<ICommandLine> adminConsole = std::make_unique<CommandLine>();
     try
     {
-        while (true)
-            userConsole.inputCmd();
+        do
+        {
+            isEOP = adminConsole->inputCmd();/* code */
+        } while (isEOP);
+        
+            
     }
     catch (...)
     {

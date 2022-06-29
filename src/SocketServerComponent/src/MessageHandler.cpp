@@ -22,7 +22,7 @@ void MessageHandler::resendMessages()
 
 void MessageHandler::checkForMessage()
 {
-
+    while (true) {
         int ret = epoll_wait(pofd, events, 20, 1000);
         for(int i = 0; i < ret; i++)
         {
@@ -37,4 +37,5 @@ void MessageHandler::checkForMessage()
 
         }
         resendMessages();
+    }
 }

@@ -1,5 +1,7 @@
-#ifndef SOCKET_HPP
-#define SOCKET_HPP
+#ifndef TCPSOCKET_HPP
+#define TCPSOCKET_HPP
+
+#include "BaseSocket.hpp"
 
 #include <iostream>
 #include <unistd.h>
@@ -9,23 +11,9 @@
 #include <vector>
 #include <memory>
 
-struct User
-{
-    char* login = new char[64];
-    char* password = new char[64];
-    int socketDS;
-};
 
-enum class SocketStatus : uint8_t
-{
-    connected = 0,
-    err_socket_init = 1,
-    err_socket_bind = 2,
-    err_socket_connect = 3,
-    disconnected = 4
-};
 
-class Socket
+class TcpSocket : public BaseSocket
 {
     int socketDs;
     std::string ip;
@@ -34,7 +22,6 @@ class Socket
     SocketStatus status;
 
 public:
-    Socket() = default;
     Socket(std::string ip, std::string port);
     ~Socket();
 
@@ -52,4 +39,4 @@ private:
 
 };
 
-#endif // SOCKET_HPP
+#endif // TCPSOCKET_HPP

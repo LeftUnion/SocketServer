@@ -41,7 +41,7 @@ void ServerManager::exec(const std::string &&cmd)
     }
 }
 
-bool ServerManager::checkCfg(const std::string &filePath)
+bool ServerManager::checkCfg(const std::string &filePath = "/home/left/gitProjects/Server/src/SocketServerComponent/src/cfg/settings.cfg")
 {
     std::ifstream cfgFile;
     cfgFile.open(filePath);
@@ -55,6 +55,7 @@ bool ServerManager::checkCfg(const std::string &filePath)
         auto div = buffer.find("=");
         auto field = buffer.substr(0, div);
         auto fieldPos = cfgInit.find(field);
+
         if(fieldPos == cfgInit.end()){
             std::cout << "We can not find field: " << field << std::endl;
             return false;
@@ -67,14 +68,9 @@ bool ServerManager::checkCfg(const std::string &filePath)
 
 void ServerManager::help() const
 {
-    std::cout << "start - start the server" << std::endl;
-    std::cout << "restart - restart the server" << std::endl;
-    std::cout << "stop - stop work of the server" << std::endl;
-    std::cout << "showusers - list of online users" << std::endl;
-    std::cout << "kick userName(arg1) - kick user(arg1), if one is online " << std::endl;
-    std::cout << "messageto userName(arg1) message(arg2) - send a user(arg1) a message(arg2)" << std::endl;
-    std::cout << "messageall message(arg1) - send all users a message(arg1) " << std::endl;
-    std::cout << "exit - stop server and stop the terminal execution" << std::endl;
+    for(const auto &it : helpEpressions)
+        std::cout << it << std::endl;
+    std::cout << std::endl;
 }
 
 void ServerManager::start()
@@ -83,7 +79,7 @@ void ServerManager::start()
         std::cout << "Host socket is already created!" << std::endl;
         return;
     }
-    checkCfg("/home/left/gitProjects/Server/src/SocketServerComponent/src/cfg/settings.cfg"); //toDo Check if work
+    checkCfg(); //toDo Check if work
 
 //    Спросить у Дениса
 //    int maxUsers = std::stoi(cfgInit.find("maxUsers")->second);
@@ -103,9 +99,7 @@ void ServerManager::start()
     waitConnection.detach();
 
     messangeThread = std::thread([this](){
-        while (true) {
-            mMessanger->checkForMessage();
-        }
+        mMessanger->checkForMessage();
     });
     messangeThread.detach();
 }

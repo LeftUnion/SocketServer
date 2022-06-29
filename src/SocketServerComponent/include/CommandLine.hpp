@@ -1,16 +1,15 @@
 #ifndef COMMANDLINE_HPP
 #define COMMANDLINE_HPP
 
-#include <AdminInterface.hpp>
+#include <ICommandLine.hpp>
 #include <ServerManager.hpp>
 
 #include <iostream>
 #include <queue>
 
-
-
-class CommandLine : public AdminI
+class CommandLine : public ICommandLine
 {
+
     std::queue<std::string> commandsHistory[100];
     ServerManager server;
     std::string currentCmd;
@@ -18,10 +17,12 @@ class CommandLine : public AdminI
 public:
     CommandLine() = default;
     ~CommandLine() = default;
-    void parser(std::string inputLine);
-    void inputCmd() override;
-    std::shared_ptr<std::queue<std::string>> getCommandsHistroy() const;
+    bool inputCmd() override;
+
 private:
+    void parser(std::string inputLine);
+    std::shared_ptr<std::queue<std::string>> getCommandsHistroy() const;
+
 };
 
 #endif // COMMANDLINE_HPP
