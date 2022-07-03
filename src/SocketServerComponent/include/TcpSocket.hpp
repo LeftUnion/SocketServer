@@ -15,15 +15,10 @@
 
 class TcpSocket : public BaseSocket
 {
-    int socketDs;
-    std::string ip;
-    int port;
-    struct sockaddr_in addr;
-    SocketStatus status;
 
 public:
-    Socket(std::string ip, std::string port);
-    ~Socket();
+    TcpSocket(std::string ip, std::string port) : BaseSocket(ip, port) {}; //+
+    ~TcpSocket() = default; //+
 
     void listenAddr(const int &countUsers);
     int acceptConnection();
@@ -34,9 +29,22 @@ public:
     SocketStatus getStatus() const;
 private:
 
-    int create();
+    int create(); //+
     void bindAddr();
 
 };
+
+int TcpSocket::create() //+
+{
+    int socketInit = socket(AF_INET, SOCK_STREAM, 0);
+    if(socketInit < 0)
+    {
+        perror("Init: ");
+        this->status = SocketStatus::err_socket_init;
+    }
+    else
+        return this->socketfd = socketInit;
+}
+
 
 #endif // TCPSOCKET_HPP

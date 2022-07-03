@@ -9,6 +9,7 @@ Socket::Socket(std::string ip, std::string port)
     addr.sin_family = AF_INET;
     addr.sin_port = htons(this->port);
     addr.sin_addr.s_addr = inet_addr(ip.c_str());
+    
 
     create();
     std::cout << "=> Socket #" << socketDs << " has been created" << std::endl;

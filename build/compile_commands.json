@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/CommandLine.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/CommandLine.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/CommandLine.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/ConnectionHandler.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/ConnectionHandler.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/ConnectionHandler.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/DataBase.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/DataBase.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/DataBase.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/Logger.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/Logger.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/Logger.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/MessageHandler.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/MessageHandler.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/MessageHandler.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/ServerManager.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/ServerManager.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/ServerManager.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/Socket.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/Socket.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/Socket.cpp"
+},
+{
+  "directory": "/home/left/gitProjects/Server/build/src/SocketServerComponent",
+  "command": "/usr/bin/g++ -DQT_CORE_LIB -DQT_SQL_LIB -I/home/left/gitProjects/Server/build/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent -I/home/left/gitProjects/Server/src/SocketServerComponent/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtSql -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -pthread -o CMakeFiles/Server.dir/src/main.cpp.o -c /home/left/gitProjects/Server/src/SocketServerComponent/src/main.cpp",
+  "file": "/home/left/gitProjects/Server/src/SocketServerComponent/src/main.cpp"
+}
+]

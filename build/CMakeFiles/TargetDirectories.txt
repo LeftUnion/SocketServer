@@ -1,0 +1,7 @@
+/home/left/gitProjects/Server/build/CMakeFiles/rebuild_cache.dir
+/home/left/gitProjects/Server/build/CMakeFiles/edit_cache.dir
+/home/left/gitProjects/Server/build/src/CMakeFiles/rebuild_cache.dir
+/home/left/gitProjects/Server/build/src/CMakeFiles/edit_cache.dir
+/home/left/gitProjects/Server/build/src/SocketServerComponent/CMakeFiles/rebuild_cache.dir
+/home/left/gitProjects/Server/build/src/SocketServerComponent/CMakeFiles/edit_cache.dir
+/home/left/gitProjects/Server/build/src/SocketServerComponent/CMakeFiles/Server.dir

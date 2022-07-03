@@ -13,7 +13,6 @@ bool CommandLine::inputCmd()
     commandsHistory->push(currentCmd);
     server.exec(std::move(currentCmd));
 
-
 }
 
 //std::shared_ptr<std::queue<std::string> > CommandLine::getCommandsHistroy() const
