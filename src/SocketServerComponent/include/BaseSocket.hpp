@@ -22,7 +22,7 @@ class BaseSocket : public ISocket
 //REALISE
 //Fileds
 protected:
-    socklen_t socketfd; 
+    socklen_t mSocketfd; 
     struct sockaddr_in addr;
     SocketStatus status = SocketStatus::disconnected;
 

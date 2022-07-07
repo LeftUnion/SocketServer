@@ -1,0 +1,6 @@
+#ifndef SOCKETEXCEPTION_HPP
+#define SOCKETEXCEPTION_HPP
+
+
+
+#endif

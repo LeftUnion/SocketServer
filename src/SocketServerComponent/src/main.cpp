@@ -1,11 +1,12 @@
 #include "CommandLine.hpp"
+#include "exception"
 
 #include <memory>
 
 int main()
 {
     bool isEOP = false;
-    std::unique_ptr<ICommandLine> adminConsole = std::make_unique<CommandLine>();
+    std::unique_ptr<ICommandLine> adminConsole = std::make_unique<ICommandLine>();
     try
     {
         do
@@ -14,6 +15,10 @@ int main()
         } while (isEOP);
         
             
+    }
+    catch(const std::exception& err)
+    {
+        std::cout << "ERROR: " << err.what();
     }
     catch (...)
     {
