@@ -6,14 +6,15 @@
 #include <arpa/inet.h>
 #include <sys/socket.h>
 #include <sys/un.h>
+#include <exception>
 
 class ISocket {
 public:
     ISocket() = default; //+
     ~ISocket() = default; //+
     virtual bool listen(const size_t& users) = 0; //+
-    virtual int accept(const size_t& hostSockfd, const struct sockaddr& userAddr, socklen_t addrlen) = 0; //+
-    virtual int connect(const int, const struct sockaddr& hostAddr, socklen_t addrlen) = 0; //+
+    virtual int accept(const size_t& hostSockfd,  struct sockaddr& userAddr, socklen_t addrlen) = 0; //+
+    virtual int connect(const int hostScoketfd, const struct sockaddr& connectAddr, socklen_t addrlen) = 0; //+
 
 protected:
     virtual int create() = 0; //+

@@ -11,40 +11,18 @@
 #include <vector>
 #include <memory>
 
-
-
 class TcpSocket : public BaseSocket
 {
+//Fields
 
+//Methods
 public:
-    TcpSocket(std::string ip, std::string port) : BaseSocket(ip, port) {}; //+
+    TcpSocket(std::string ip, std::string port);; //+
     ~TcpSocket() = default; //+
 
-    void listenAddr(const int &countUsers);
-    int acceptConnection();
-
-    int getSocketDs() const;
-    std::string getServerIP() const;
-    int getPort() const;
-    SocketStatus getStatus() const;
 private:
-
-    int create(); //+
-    void bindAddr();
-
+    int create() override final; //+
 };
-
-int TcpSocket::create() //+
-{
-    int socketInit = socket(AF_INET, SOCK_STREAM, 0);
-    if(socketInit < 0)
-    {
-        perror("Init: ");
-        this->status = SocketStatus::err_socket_init;
-    }
-    else
-        return this->socketfd = socketInit;
-}
 
 
 #endif // TCPSOCKET_HPP

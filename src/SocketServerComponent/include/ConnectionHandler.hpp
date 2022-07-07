@@ -2,7 +2,7 @@
 #define CONNECTIONHANDLER_HPP
 
 #include <UseCases.hpp>
-#include <Socket.hpp>
+#include <ISocket.hpp>
 
 #include <mutex>
 #include <list>
