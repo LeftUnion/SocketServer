@@ -16,12 +16,13 @@ public:
     IDataBase(const IDataBase&&) = delete;
     IDdataBase& operator=(const IDataBase&&) = delete;
 
+    //TODO EXCEPTIONS
 protected:
-    virtual createDB(const std::string&& DBMS) = 0;
-    virtual signInDB(std::string dBName, std::string userName, std::string password) = 0;
-    virtual isOpen() = 0;
-    virtual insert(const std::string& table, std::string&& data) = 0;
-    virtual select(const std::string& table, std::string&& request) = 0;
+    virtual bool createDB(const std::string&& DBMS) = 0;
+    virtual bool signInDB(std::string dBName, std::string userName, std::string password) = 0;
+    virtual bool isOpen() = 0;
+    virtual bool insert(const std::string& table, std::string&& data) = 0;
+    virtual bool select(const std::string& table, std::string&& request) = 0;
 
 
 

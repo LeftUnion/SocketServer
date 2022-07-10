@@ -13,7 +13,8 @@ int TcpSocket::create() //+
     {
         perror("Init: ");
         this->status = SocketStatus::err_socket_init;
+        return -1;
     }
     else
-        return this->socketfd = socketInit;
+        return socketInit;
 }

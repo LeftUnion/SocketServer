@@ -7,19 +7,19 @@ BaseSocket::BaseSocket(const std::string& ip, const std::string& port)
     addr.sin_port = htons(std::stoi(port));
     addr.sin_addr.s_addr = inet_addr(ip.c_str());
 
-    this->socketfd = ISocket::create();
+    this->mSocketfd = ISocket::create();
     ISocket::bind(ip, port);
 }
 
 BaseSocket::~BaseSocket() //+
 {
-    BaseSocket::close(this->socketfd);
+    BaseSocket::close(this->mSocketfd);
 }
 
 //Methods
 bool BaseSocket::bind(const std::string &ip, const std::string &port)
 {
-    int rBind = ::bind(socketfd, reinterpret_cast<sockaddr*>(&addr), sizeof (addr));
+    int rBind = ::bind(mSocketfd, reinterpret_cast<sockaddr*>(&addr), sizeof (addr));
     if(rBind < 0)
     {
         //TODO
@@ -32,7 +32,7 @@ bool BaseSocket::bind(const std::string &ip, const std::string &port)
 
 bool BaseSocket::listen(const size_t& users) //+
 {
-    int rListen = ::listen(this->socketfd, users);
+    int rListen = ::listen(this->mSocketfd, users);
     std::cout << "Start listening on port: " << ntohs(this->addr.sin_port) << std::endl;
     if(rListen < 0)
     {
@@ -61,7 +61,7 @@ SocketStatus BaseSocket::getStatus()
 
 socklen_t BaseSocket::getSocketfd()
 {
-    return this->socketfd;
+    return this->mSocketfd;
 }
 
 int BaseSocket::connect(const int socketfd, const struct sockaddr& connectAddr, socklen_t addrlen)
@@ -80,7 +80,7 @@ int BaseSocket::connect(const int socketfd, const struct sockaddr& connectAddr, 
 int BaseSocket::close(const socklen_t& socketfd) //+
 {
     int rClose = close(socketfd);
-    std::cout << "Socket #" << this->socketfd << " closed" << std::endl;
+    std::cout << "Socket #" << this->mSocketfd << " closed" << std::endl;
     if(rClose == -1)
     {
         //TODO

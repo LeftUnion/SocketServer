@@ -19,7 +19,6 @@ enum class SocketStatus : uint8_t
 class BaseSocket : public ISocket 
 {
 
-//REALISE
 //Fileds
 protected:
     socklen_t mSocketfd; 
@@ -50,9 +49,7 @@ private:
     bool bind(const std::string& ip, const std::string& port) override final;
     int close(const socklen_t& socketfd) override final;
 
-//OVERRIDE 
-protected:
-    int create() override;
+
 
 };
 

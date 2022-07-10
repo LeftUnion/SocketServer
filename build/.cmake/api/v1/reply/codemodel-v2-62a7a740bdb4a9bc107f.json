@@ -68,7 +68,7 @@
 				{
 					"directoryIndex" : 2,
 					"id" : "Server::@542a556824db1a27f989",
-					"jsonFile" : "target-Server-Debug-3acbfbdcf03b9b62c8b9.json",
+					"jsonFile" : "target-Server-Debug-fd055fbf98dca55f711c.json",
 					"name" : "Server",
 					"projectIndex" : 0
 				}
@@ -84,6 +84,6 @@
 	"version" : 
 	{
 		"major" : 2,
-		"minor" : 2
+		"minor" : 0
 	}
 }
