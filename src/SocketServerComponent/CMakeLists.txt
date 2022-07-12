@@ -10,10 +10,10 @@ find_package(Threads REQUIRED)
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 
-file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/inclde/BaseDataBase.hpp" )
-file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/BaseDataBase.cpp")
+file(GLOB_RECURSE HEADERS "${CMAKE_CURRENT_SOURCE_DIR}/inclde/*.hpp" )
+file(GLOB_RECURSE SOURCES "${CMAKE_CURRENT_SOURCE_DIR}/src/*.cpp")
 
-add_executable(Server ./src/main.cpp ${HEADERS} ${SOURCES})
+add_executable(Server ${HEADERS} ${SOURCES})
 
 target_link_libraries(Server
     PRIVATE

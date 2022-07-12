@@ -13,7 +13,7 @@ class User
 private:
     static size_t userCount;
     std::unique_ptr<ISocket> mSocket;
-    std::queue<BaseMessage> messageHistory;
+    //std::queue<BaseMessage> messageHistory; TODO IN DB
     std::string userName;
 
 public:
@@ -22,6 +22,6 @@ public:
 
 };
 
-size_t User::userCount = 0;
+
 
 #endif // USER_HPP

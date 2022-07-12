@@ -35,6 +35,7 @@ std::exception BaseDataBase::addUser(std::string userName, std::string pwHash)
     std::string Q_INSERT_USER = Q_ADD_USER + "('" + userName + "', '" + pwHash + "');";
     dataBase.exec(Q_INSERT_USER.c_str());
     dataBase.commit();
+    //TODO return(User exist, Not allow)
 }
 
 std::string input() noexcept

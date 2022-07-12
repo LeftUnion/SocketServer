@@ -3,25 +3,20 @@
 
 #include <UseCases.hpp>
 #include <ISocket.hpp>
+#include <User.hpp>
 
-#include <mutex>
 #include <list>
-#include <sys/epoll.h>
-
+#include <memory>
 /*
  * Этот класс занимается обработкой входящих соединений.
  * Он должен знать Макс Пользователей.(Можно менять и узнавать).
  *
 */
-struct epoll_event;
 
 class ConnectionHandler
 {
-    std::shared_ptr<Socket> hostSocket;
+    std::shared_ptr<BaseSocket> hostSocket;
     std::shared_ptr<std::list<User>> mOnlineUsers;
-
-    int pollingfd;
-    epoll_event ev;
 
     char* buffer = new char[1024];
 
@@ -33,7 +28,7 @@ class ConnectionHandler
     const char* passwordMsg = "Input your password: ";
 
 public:
-    ConnectionHandler(const std::shared_ptr<Socket> hostSocket);
+    ConnectionHandler(const std::shared_ptr<BaseSocket> hostSocket);
     ~ConnectionHandler() = default;
 
     void userAuth();

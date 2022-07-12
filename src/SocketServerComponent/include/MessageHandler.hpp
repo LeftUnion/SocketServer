@@ -1,13 +1,14 @@
 #ifndef MESSAGEHANDLER_HPP
 #define MESSAGEHANDLER_HPP
+
 #include <UseCases.hpp>
+#include <User.hpp>
+
 #include <map>
 #include <mutex>
 #include <list>
 #include <queue>
-#include <sys/epoll.h>
-
-typedef std::pair<const User, char*> msgSender;
+#include <memory>
 
 struct DataBuffer
 {
@@ -48,8 +49,7 @@ class MessageHandler
     char* buffer = new char[1024];
     std::queue<std::pair<const User, std::string>> messages;
     std::shared_ptr<std::list<User>> onlineUsers = nullptr;
-    epoll_event events[20];
-    int pofd;
+
 public:
     MessageHandler(const std::shared_ptr<std::list<User>> monlineUsers, int somefd);
     ~MessageHandler() = default;

@@ -2,16 +2,16 @@
 #define SERVERMANAGER_HPP
 
 #include <UseCases.hpp>
-#include <DataBase.hpp>
+#include <BaseDataBase.hpp>
 #include <ConnectionHandler.hpp>
 #include <MessageHandler.hpp>
+#include <TcpSocket.hpp>
 
 #include <map>
 #include <string>
 #include <thread>
 #include <mutex>
 
-extern std::mutex data;
 
 /*
  * Этот класс должен организовать работу отдельных компонентов сервера.
@@ -25,40 +25,14 @@ class ServerManager
 {
 //TODO    DataBase const lol();
 
-    std::map<std::string, availableCommands> const cmdStoI =
-    {
-        {"help", HELP},
-        {"start", START},
-        {"restart", RESTART},
-        {"stop", STOP},
-        {"showusers", SHOWUSERS},
-        {"kick", KICK},
-        {"messageto", MESSAGETO},
-        {"messageall", MESSAGEALL},
-        {"exit", EXIT}
-    };
+    static const std::map<std::string, availableCommands> cmdStoI;
+    static const size_t COUNT_HELP_EXPR = 8; //cfg read TODO
+    static const std::array<std::string, COUNT_HELP_EXPR> helpEpressions;
 
-    static uint8_t const COUNT_HELP_EXPR = 8;
-    std::array<std::string, COUNT_HELP_EXPR> const helpEpressions =
-    {
-        "start - start the server ",
-        "restart - restart the server ",
-        "stop - stop work of the server ",
-        "showusers - list of online users ",
-        "kick userName(arg1) - kick user(arg1), if one is online ",
-        "messageto userName(arg1) message(arg2) - send a user(arg1) a message(arg2) ",
-        "messageall message(arg1) - send all users a message(arg1) ",
-        "exit - stop server and stop the terminal execution"
-    };
+    std::map<std::string, std::string> cfgInit;
 
-    std::map<std::string, std::string> cfgInit =
-    {
-        {"ip", ""},
-        {"port", ""},
-        {"maxUsers", ""}
-    };
+    std::shared_ptr<BaseSocket> mHostSocket;
 
-    std::shared_ptr<Socket> mHostSocket;
     std::shared_ptr<ConnectionHandler> mListener;
     std::shared_ptr<MessageHandler> mMessanger;
     std::thread waitConnection;
@@ -73,7 +47,7 @@ public:
 
 private:
     bool checkCfg(const std::string &filePath);
-    void listenToUsers(Socket serverSocket);
+    void listenToUsers(ISocket& serverSocket);
     void help() const;
     void start();
     void restart();

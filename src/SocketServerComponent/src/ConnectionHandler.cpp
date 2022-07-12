@@ -3,13 +3,10 @@
 
 #include <sys/epoll.h>
 
-ConnectionHandler::ConnectionHandler(const std::shared_ptr<Socket> hostSocket)
+ConnectionHandler::ConnectionHandler(const std::shared_ptr<BaseSocket> hostSocket)
 {
     mOnlineUsers = std::make_shared<std::list<User>>();
     this->hostSocket = hostSocket;
-    pollingfd = epoll_create1(0);
-    if(pollingfd < 0)
-        perror("polling: ");
 }
 
 void ConnectionHandler::userAuth()

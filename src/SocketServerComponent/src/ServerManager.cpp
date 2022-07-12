@@ -1,6 +1,40 @@
 #include <ServerManager.hpp>
 #include <fstream>
 
+const std::map<std::string, availableCommands>  ServerManager::cmdStoI =
+{
+    {"help", HELP},
+    {"start", START},
+    {"restart", RESTART},
+    {"stop", STOP},
+    {"showusers", SHOWUSERS},
+    {"kick", KICK},
+    {"messageto", MESSAGETO},
+    {"messageall", MESSAGEALL},
+    {"exit", EXIT}
+};
+
+const size_t COUNT_HELP_EXPR = 8;
+const std::array<std::string, COUNT_HELP_EXPR> helpEpressions =
+{
+    "start - start the server ",
+    "restart - restart the server ",
+    "stop - stop work of the server ",
+    "showusers - list of online users ",
+    "kick userName(arg1) - kick user(arg1), if one is online ",
+    "messageto userName(arg1) message(arg2) - send a user(arg1) a message(arg2) ",
+    "messageall message(arg1) - send all users a message(arg1) ",
+    "exit - stop server and stop the terminal execution"
+};
+
+std::map<std::string, std::string> cfgInit =
+{
+    {"ip", ""},
+    {"port", ""},
+    {"maxUsers", ""}
+};
+
+
 void ServerManager::exec(const std::string &&cmd)
 {
     availableCommands chooseCmd;
@@ -15,24 +49,24 @@ void ServerManager::exec(const std::string &&cmd)
     case START:
         start();
         break;
-//    case RESTART:
-//        restart();
-//        break;
-//    case STOP:
-//        stop();
-//        break;
-//    case SHOWUSERS:
-//        showusers();
-//        break;
-//    case KICK:
-//        kick();
-//        break;
-//    case MESSAGETO:
-//        //messageto(arg);
-//        break;
-//    case MESSAGEALL:
-//        messageall();
-//        break;
+    case RESTART:
+        restart();
+        break;
+    case STOP:
+        stop();
+        break;
+    case SHOWUSERS:
+        showusers();
+        break;
+    case KICK:
+        kick();
+        break;
+    case MESSAGETO:
+        //messageto(arg);
+        break;
+    case MESSAGEALL:
+        messageall();
+        break;
     case EXIT:
         exit();
         break;
@@ -45,18 +79,21 @@ bool ServerManager::checkCfg(const std::string &filePath = "/home/left/gitProjec
 {
     std::ifstream cfgFile;
     cfgFile.open(filePath);
-    if(!cfgFile.is_open()){
+    if(!cfgFile.is_open())
+    {
         std::cout << "Config file has not founded!";
         return false;
     }
 
     std::string buffer;
-    while(getline(cfgFile, buffer)) {
+    while(getline(cfgFile, buffer))
+    {
         auto div = buffer.find("=");
         auto field = buffer.substr(0, div);
         auto fieldPos = cfgInit.find(field);
 
-        if(fieldPos == cfgInit.end()){
+        if(fieldPos == cfgInit.end())
+        {
             std::cout << "We can not find field: " << field << std::endl;
             return false;
         }
@@ -81,14 +118,8 @@ void ServerManager::start()
     }
     checkCfg(); //toDo Check if work
 
-//    Спросить у Дениса
-//    int maxUsers = std::stoi(cfgInit.find("maxUsers")->second);
-//    std::string inIP = cfgInit.find("ip")->second;
-//    std::string inPort = cfgInit.find("port")->second;
-//    mHostSocket = std::make_shared<Socket>(inIP, inPort);
-
-    mHostSocket = std::make_shared<Socket>(cfgInit.find("ip")->second, cfgInit.find("port")->second);
-    mHostSocket->listenAddr(std::stoi(cfgInit.find("maxUsers")->second));
+    mHostSocket = std::make_shared<TcpSocket>(cfgInit.find("ip")->second, cfgInit.find("port")->second);
+    mHostSocket->listen(std::stoi(cfgInit.find("maxUsers")->second));
 
     mListener = std::make_shared<ConnectionHandler>(mHostSocket);
     mMessanger = std::make_shared<MessageHandler>(mListener->getOnlineUsers(), mListener->polfd());
@@ -104,8 +135,14 @@ void ServerManager::start()
     messangeThread.detach();
 }
 
+void ServerManager::restart()
+{
+    stop();
+    start();
+}
+
 void ServerManager::exit()
 {
-    close(mHostSocket->getSocketDs());
+    close(mHostSocket->getSocketfd());
     exit();
 }
