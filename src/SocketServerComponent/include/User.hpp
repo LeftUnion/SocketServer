@@ -14,10 +14,7 @@ private:
     static size_t userCount;
     std::unique_ptr<ISocket> mSocket;
     std::queue<BaseMessage> messageHistory;
-    std::string login;
-    std::string password;
-
-    //TODO insert login and password into DB
+    std::string userName;
 
 public:
     User(int&& socket);

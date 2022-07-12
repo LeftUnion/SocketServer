@@ -2,7 +2,6 @@
 #define MESSAGEHANDLER_HPP
 #include <UseCases.hpp>
 #include <map>
-#include <Socket.hpp>
 #include <mutex>
 #include <list>
 #include <queue>
