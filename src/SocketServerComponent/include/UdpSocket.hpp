@@ -7,6 +7,8 @@ class UdpSocket : public BaseSocket
 {
 
 public:
+    UdpSocket() = default;
+    UdpSocket(int socketfd, sockaddr_in addr);
     UdpSocket(std::string ip, std::string port);; //+
     ~UdpSocket() = default; //+
 

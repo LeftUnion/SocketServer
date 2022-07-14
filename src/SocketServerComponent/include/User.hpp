@@ -7,18 +7,23 @@
 #include <memory>
 #include <queue>
 
-
 class User
 {
 private:
     static size_t userCount;
-    std::unique_ptr<ISocket> mSocket;
+    std::shared_ptr<BaseSocket> mReadSocket = nullptr;
+    std::shared_ptr<BaseSocket> mWriteSocket = nullptr;
     //std::queue<BaseMessage> messageHistory; TODO IN DB
     std::string userName;
 
 public:
-    User(int&& socket);
-    ~User();
+    User() = default;
+    User(int socketfd, sockaddr_in addr);
+    ~User() = default;
+
+    std::shared_ptr<BaseSocket> getReadSocket() const;
+    std::shared_ptr<BaseSocket> getWriteSocket() const;
+    void setReadSocket(std::shared_ptr<BaseSocket>);
 
 };
 

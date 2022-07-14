@@ -4,6 +4,7 @@
 #include "ISocket.hpp"
 
 #include <iostream>
+#include <memory>
 
 enum class SocketStatus : uint8_t 
 {
@@ -21,13 +22,15 @@ class BaseSocket : public ISocket
 
 //Fileds
 protected:
-    socklen_t mSocketfd; 
+    socklen_t mSocketfd;
     struct sockaddr_in addr;
     SocketStatus status = SocketStatus::disconnected;
 
 //Methods-members
 public:
     //Constructors
+    BaseSocket() = default;
+    BaseSocket(const int& socketfd, const sockaddr_in& addr);
     BaseSocket(const std::string& ip, const std::string& port); //+
     ~BaseSocket(); //+
 
@@ -38,15 +41,18 @@ public:
 
     //Methods-Func
     bool listen(const size_t& users) override final; //+
-    int accept(const size_t &hostSockfd, sockaddr &userAddr, socklen_t addrlen) override final;
+    int accept(const size_t &hostSockfd, sockaddr* userAddr, socklen_t* addrlen) override final;
     int connect(const int sokcetfd, const struct sockaddr& connectAddr, socklen_t addrlen) override final;
 
     //Getters|Setters
     SocketStatus getStatus();
     socklen_t getSocketfd();
+    std::shared_ptr<sockaddr_in> getAddr();
+
+protected:
+    bool bind() override final;
 
 private:
-    bool bind(const std::string& ip, const std::string& port) override final;
     int close(const socklen_t& socketfd) override final;
 
 

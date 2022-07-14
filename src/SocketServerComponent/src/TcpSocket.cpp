@@ -4,7 +4,12 @@
 
 //Methods
 
-TcpSocket::TcpSocket(std::string ip, std::string port) : BaseSocket(ip, port) {}
+TcpSocket::TcpSocket(int socketfd, sockaddr_in addr) : BaseSocket(socketfd, addr){}
+TcpSocket::TcpSocket(std::string ip, std::string port) : BaseSocket(ip, port)
+{
+    create();
+    bind();
+}
 
 int TcpSocket::create() //+
 {

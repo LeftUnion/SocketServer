@@ -13,9 +13,7 @@ int main()
         do
         {
             isEOP = adminConsole->inputCmd();/* code */
-        } while (isEOP);
-        
-            
+        } while (isEOP);    
     }
     catch(const std::exception& err)
     {

@@ -26,15 +26,14 @@ class ServerManager
 //TODO    DataBase const lol();
 
     static const std::map<std::string, availableCommands> cmdStoI;
-    static const size_t COUNT_HELP_EXPR = 8; //cfg read TODO
-    static const std::array<std::string, COUNT_HELP_EXPR> helpEpressions;
+    static const std::vector<std::string> helpEpressions;
 
     std::map<std::string, std::string> cfgInit;
 
     std::shared_ptr<BaseSocket> mHostSocket;
 
     std::shared_ptr<ConnectionHandler> mListener;
-    std::shared_ptr<MessageHandler> mMessanger;
+    //std::shared_ptr<MessageHandler> mMessanger;
     std::thread waitConnection;
     std::thread messangeThread;
 

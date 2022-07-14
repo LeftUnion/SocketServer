@@ -18,20 +18,19 @@ class ConnectionHandler
     std::shared_ptr<BaseSocket> hostSocket;
     std::shared_ptr<std::list<User>> mOnlineUsers;
 
-    char* buffer = new char[1024];
-
     //Preset Phrases
-    const char* welcomeMsg  = "Welocome!\nInput your login and password.\n";
-    const char* authMsg     = "Welocome!\nInput your login and password.\n";
-    const char* errorMsg    = "Wrong login or pass! Try Again!\n";
-    const char* loginMsg    = "Input your login: ";
-    const char* passwordMsg = "Input your password: ";
+    static const char* MSG_WELCOME;
+    static const char* MSG_AUTH;
+    static const char* MSG_ERROR;
+    static const char* MSG_LOGIN;
+    static const char* MSG_PASSWORD;
 
 public:
     ConnectionHandler(const std::shared_ptr<BaseSocket> hostSocket);
     ~ConnectionHandler() = default;
 
-    void userAuth();
+    bool acceptConnection();
+    bool userAuth(User &inUser);
     int polfd() const;
     std::shared_ptr<std::list<User>> getOnlineUsers();
 private:

@@ -1,58 +1,45 @@
 #include <ConnectionHandler.hpp>
 
-
-#include <sys/epoll.h>
+const char* ConnectionHandler::MSG_WELCOME  = "Welocome!\nInput your login and password.\n";
+const char* ConnectionHandler::MSG_AUTH     = "Welocome!\nInput your login and password.\n";
+const char* ConnectionHandler::MSG_ERROR    = "Wrong login or pass! Try Again!\n";
+const char* ConnectionHandler::MSG_LOGIN    = "Input your login: ";
+const char* ConnectionHandler::MSG_PASSWORD = "Input your password: ";
 
 ConnectionHandler::ConnectionHandler(const std::shared_ptr<BaseSocket> hostSocket)
 {
-    mOnlineUsers = std::make_shared<std::list<User>>();
     this->hostSocket = hostSocket;
+    mOnlineUsers = std::make_shared<std::list<User>>();
 }
 
-void ConnectionHandler::userAuth()
+bool ConnectionHandler::acceptConnection()
 {
-    //main Connection Loop
-    while (true) {
+    User tmpUser;
+    sockaddr_in tmpAddr;
+    int tmpSocket = hostSocket->accept(hostSocket->getSocketfd(), reinterpret_cast<sockaddr*>(&tmpAddr), nullptr);
 
-        User inUser;
-        bool isAuth = true;
-        inUser.socketDS = hostSocket->acceptConnection();
-        send(inUser.socketDS, welcomeMsg, sizeof(welcomeMsg), 0);
+    User inUser = User(tmpSocket, tmpAddr);
+    mOnlineUsers->push_back(inUser);
+    userAuth(inUser);
+    return true;
+}
 
-        ev.events = EPOLLIN | EPOLLOUT;
-        ev.data.fd = pollingfd;
-        if(epoll_ctl(pollingfd, EPOLL_CTL_ADD, inUser.socketDS, &ev))
-            perror("Epoll add");
+bool ConnectionHandler::userAuth(User& inUser)
+{
+    bool isAuth = false;
+    std::string buffer = "Auth MEssage";
+    int userWriteSocketfd = inUser.getWriteSocket()->getSocketfd();
 
-        //send/get login
-        send(inUser.socketDS, loginMsg, sizeof(loginMsg), 0); //TODO BD Check
-        recv(inUser.socketDS, buffer, sizeof(buffer), 0);
-        if(sizeof(buffer) > 0)
-            inUser.login = buffer;
-
-        //send/get password
-        send(inUser.socketDS, passwordMsg, sizeof(passwordMsg), 0);
-        do {
-            recv(inUser.socketDS, inUser.password, sizeof(inUser.password), 0);
-            recv(inUser.socketDS, buffer, sizeof(buffer), 0);
-        } while(inUser.password != buffer);
-        if(sizeof(buffer) > 0)
-            inUser.password = buffer;
-
-        if(isAuth == true)
-        {
-            send(inUser.socketDS, authMsg, sizeof(authMsg), 0);
-            mOnlineUsers->push_back(inUser);
-        }
-        else
-            close(inUser.socketDS);
+    send(userWriteSocketfd, buffer.c_str(), sizeof (buffer), 0);
+    isAuth = true;
+    if(!isAuth)
+    {
+        close(userWriteSocketfd);
+        return  isAuth;
     }
+    return isAuth;
 }
 
-int ConnectionHandler::polfd() const
-{
-    return pollingfd;
-}
 
 std::shared_ptr<std::list<User>> ConnectionHandler::getOnlineUsers()
 {

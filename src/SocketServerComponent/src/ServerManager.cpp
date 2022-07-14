@@ -14,8 +14,7 @@ const std::map<std::string, availableCommands>  ServerManager::cmdStoI =
     {"exit", EXIT}
 };
 
-const size_t COUNT_HELP_EXPR = 8;
-const std::array<std::string, COUNT_HELP_EXPR> helpEpressions =
+const std::vector<std::string> ServerManager::helpEpressions =
 {
     "start - start the server ",
     "restart - restart the server ",
@@ -30,7 +29,7 @@ const std::array<std::string, COUNT_HELP_EXPR> helpEpressions =
 std::map<std::string, std::string> cfgInit =
 {
     {"ip", ""},
-    {"port", ""},
+    {"connectionPort", ""},
     {"maxUsers", ""}
 };
 
@@ -49,27 +48,27 @@ void ServerManager::exec(const std::string &&cmd)
     case START:
         start();
         break;
-    case RESTART:
-        restart();
-        break;
-    case STOP:
-        stop();
-        break;
-    case SHOWUSERS:
-        showusers();
-        break;
-    case KICK:
-        kick();
-        break;
-    case MESSAGETO:
-        //messageto(arg);
-        break;
-    case MESSAGEALL:
-        messageall();
-        break;
-    case EXIT:
-        exit();
-        break;
+//    case RESTART:
+//        restart();
+//        break;
+//    case STOP:
+//        stop();
+//        break;
+//    case SHOWUSERS:
+//        showusers();
+//        break;
+//    case KICK:
+//        kick();
+//        break;
+//    case MESSAGETO:
+//        //messageto(arg);
+//        break;
+//    case MESSAGEALL:
+//        messageall();
+//        break;
+//    case EXIT:
+//        exit();
+//        break;
     default:
         std::cout << "Command \"" << cmd << "\" doesn't exist. Try \"help\" " << std::endl;
     }
@@ -122,24 +121,24 @@ void ServerManager::start()
     mHostSocket->listen(std::stoi(cfgInit.find("maxUsers")->second));
 
     mListener = std::make_shared<ConnectionHandler>(mHostSocket);
-    mMessanger = std::make_shared<MessageHandler>(mListener->getOnlineUsers(), mListener->polfd());
+    //mMessanger = std::make_shared<MessageHandler>(mListener->getOnlineUsers());
 
     waitConnection = std::thread([this](){
-        mListener->userAuth();
+        mListener->acceptConnection();
     });
     waitConnection.detach();
 
-    messangeThread = std::thread([this](){
-        mMessanger->checkForMessage();
-    });
+//    messangeThread = std::thread([this](){
+//        mMessanger->checkForMessage();
+//    });
     messangeThread.detach();
 }
 
-void ServerManager::restart()
-{
-    stop();
-    start();
-}
+//void ServerManager::restart()
+//{
+//    stop();
+//    start();
+//}
 
 void ServerManager::exit()
 {

@@ -6,9 +6,12 @@ BaseSocket::BaseSocket(const std::string& ip, const std::string& port)
     addr.sin_family = AF_INET;
     addr.sin_port = htons(std::stoi(port));
     addr.sin_addr.s_addr = inet_addr(ip.c_str());
+}
 
-    this->mSocketfd = ISocket::create();
-    ISocket::bind(ip, port);
+BaseSocket::BaseSocket(const int& socketfd, const sockaddr_in& addr)
+{
+    this->mSocketfd = socketfd;
+    this->addr = addr;
 }
 
 BaseSocket::~BaseSocket() //+
@@ -17,9 +20,9 @@ BaseSocket::~BaseSocket() //+
 }
 
 //Methods
-bool BaseSocket::bind(const std::string &ip, const std::string &port)
+bool BaseSocket::bind()
 {
-    int rBind = ::bind(mSocketfd, reinterpret_cast<sockaddr*>(&addr), sizeof (addr));
+    int rBind = ::bind(mSocketfd, reinterpret_cast<struct sockaddr*>(&addr), sizeof (addr));
     if(rBind < 0)
     {
         //TODO
@@ -43,13 +46,14 @@ bool BaseSocket::listen(const size_t& users) //+
     return rListen;
 }
 
-int BaseSocket::accept(const size_t &hostSockfd, struct sockaddr& userAddr, socklen_t addrlen)
+int BaseSocket::accept(const size_t &hostSockfd, struct sockaddr* userAddr, socklen_t* addrlen)
 {
-    int clientSocket = ::accept(hostSockfd, reinterpret_cast<sockaddr*>(&userAddr), &addrlen);
+    int clientSocket = ::accept(hostSockfd, userAddr, addrlen);
     if(clientSocket < 0)
     {
         perror("Accept: ");
         this->status = SocketStatus::err_socket_accept;
+        return false;
     }
             return clientSocket;
 }
@@ -62,6 +66,11 @@ SocketStatus BaseSocket::getStatus()
 socklen_t BaseSocket::getSocketfd()
 {
     return this->mSocketfd;
+}
+
+std::shared_ptr<sockaddr_in> BaseSocket::getAddr()
+{
+    return std::make_shared<sockaddr_in>(addr);
 }
 
 int BaseSocket::connect(const int socketfd, const struct sockaddr& connectAddr, socklen_t addrlen)

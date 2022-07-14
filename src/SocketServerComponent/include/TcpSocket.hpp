@@ -17,7 +17,9 @@ class TcpSocket : public BaseSocket
 
 //Methods
 public:
-    TcpSocket(std::string ip, std::string port);; //+
+    TcpSocket(int&& socketfd);
+    TcpSocket(int socketfd, sockaddr_in addr);
+    TcpSocket(std::string ip, std::string port); //+
     ~TcpSocket() = default; //+
 
 private:
