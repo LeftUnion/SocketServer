@@ -28,7 +28,7 @@ class ServerManager
     static const std::map<std::string, availableCommands> cmdStoI;
     static const std::vector<std::string> helpEpressions;
 
-    std::map<std::string, std::string> cfgInit;
+    static std::map<std::string, std::string> cfgInit;
 
     std::shared_ptr<BaseSocket> mHostSocket;
 

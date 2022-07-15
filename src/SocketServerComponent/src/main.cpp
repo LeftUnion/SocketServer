@@ -6,14 +6,14 @@
 
 int main()
 {
-    bool isEOP = false;
+    bool isEOP = true;
     std::unique_ptr<ICommandLine> adminConsole = std::make_unique<CommandLine>();
     try
     {
         do
         {
             isEOP = adminConsole->inputCmd();/* code */
-        } while (isEOP);    
+        } while (1);
     }
     catch(const std::exception& err)
     {

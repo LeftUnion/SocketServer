@@ -7,7 +7,7 @@
 TcpSocket::TcpSocket(int socketfd, sockaddr_in addr) : BaseSocket(socketfd, addr){}
 TcpSocket::TcpSocket(std::string ip, std::string port) : BaseSocket(ip, port)
 {
-    create();
+    mSocketfd = create();
     bind();
 }
 

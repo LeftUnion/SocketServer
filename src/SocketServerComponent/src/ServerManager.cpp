@@ -26,7 +26,7 @@ const std::vector<std::string> ServerManager::helpEpressions =
     "exit - stop server and stop the terminal execution"
 };
 
-std::map<std::string, std::string> cfgInit =
+std::map<std::string, std::string> ServerManager::cfgInit =
 {
     {"ip", ""},
     {"connectionPort", ""},
@@ -117,7 +117,7 @@ void ServerManager::start()
     }
     checkCfg(); //toDo Check if work
 
-    mHostSocket = std::make_shared<TcpSocket>(cfgInit.find("ip")->second, cfgInit.find("port")->second);
+    mHostSocket = std::make_shared<TcpSocket>(cfgInit.find("ip")->second, cfgInit.find("connectionPort")->second);
     mHostSocket->listen(std::stoi(cfgInit.find("maxUsers")->second));
 
     mListener = std::make_shared<ConnectionHandler>(mHostSocket);
@@ -131,7 +131,7 @@ void ServerManager::start()
 //    messangeThread = std::thread([this](){
 //        mMessanger->checkForMessage();
 //    });
-    messangeThread.detach();
+//    messangeThread.detach();
 }
 
 //void ServerManager::restart()

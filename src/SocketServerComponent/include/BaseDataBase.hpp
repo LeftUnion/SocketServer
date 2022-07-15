@@ -15,6 +15,7 @@ protected:
 private:
     static const std::string Q_CREATE_TABLE;
     static const std::string Q_ADD_USER;
+    static const std::string Q_CHECK_USER;
     //TODO HASH FUNC + PASSWORD
     QSqlDatabase dataBase;
     bool initDb();
@@ -30,6 +31,7 @@ public:
 
     std::exception createUsersTable() noexcept;
     std::exception addUser(std::string userName, std::string pwHash); //TODO HASH
+    bool checkUserExists(std::string userName, std::string pwHash);
 
 };
 std::string input() noexcept;

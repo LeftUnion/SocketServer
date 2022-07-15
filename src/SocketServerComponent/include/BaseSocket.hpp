@@ -43,6 +43,7 @@ public:
     bool listen(const size_t& users) override final; //+
     int accept(const size_t &hostSockfd, sockaddr* userAddr, socklen_t* addrlen) override final;
     int connect(const int sokcetfd, const struct sockaddr& connectAddr, socklen_t addrlen) override final;
+    int close(const socklen_t& socketfd) override final;
 
     //Getters|Setters
     SocketStatus getStatus();
@@ -53,7 +54,7 @@ protected:
     bool bind() override final;
 
 private:
-    int close(const socklen_t& socketfd) override final;
+
 
 
 

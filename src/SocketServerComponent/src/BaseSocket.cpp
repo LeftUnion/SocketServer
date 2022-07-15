@@ -26,7 +26,7 @@ bool BaseSocket::bind()
     if(rBind < 0)
     {
         //TODO
-        perror("Bind: ");
+        perror("Bind");
         status = SocketStatus::err_socket_bind;
         return false;
     }

@@ -4,6 +4,7 @@
 #include <UseCases.hpp>
 #include <ISocket.hpp>
 #include <User.hpp>
+#include <BaseDataBase.hpp>
 
 #include <list>
 #include <memory>
@@ -17,6 +18,7 @@ class ConnectionHandler
 {
     std::shared_ptr<BaseSocket> hostSocket;
     std::shared_ptr<std::list<User>> mOnlineUsers;
+    std::shared_ptr<BaseDataBase> usersDataBase;
 
     //Preset Phrases
     static const char* MSG_WELCOME;
@@ -31,6 +33,7 @@ public:
 
     bool acceptConnection();
     bool userAuth(User &inUser);
+    std::unique_ptr<BaseSocket> makeReadSocket();
     int polfd() const;
     std::shared_ptr<std::list<User>> getOnlineUsers();
 private:
